@@ -4,6 +4,7 @@ from product import Product
 class Cart:
     def __init__(self) -> None:
         self.items = {}
+        self.discounts = {}
 
     def add_product(self, product: Product, qtd: int = 1) -> None:
         if self.items.get(product.code, None) is None:
@@ -13,6 +14,12 @@ class Cart:
             }
         else:
             self.items[product.code]["qtd"] += qtd
+
+    def add_discount(self, code, discount) -> None:
+        raise
+
+    def remove_discount(self, code) -> None:
+        raise
 
     def __get_item(self, code: str) -> dict:
         item = self.items.get(code, None)
