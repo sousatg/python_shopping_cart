@@ -18,4 +18,9 @@ class Cart:
         raise
 
     def calculate_total(self) -> float:
-        raise
+        total = 0.0
+
+        for item in self.items.values():
+            total += item.get("price", 0.0) * item.get("qtd", 0)
+
+        return total
