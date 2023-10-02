@@ -14,8 +14,22 @@ class Cart:
         else:
             self.items[product.code]["qtd"] += qtd
 
-    def remove_product(self, product: Product):
-        raise
+    def __get_item(self, code: str) -> dict:
+        item = self.items.get(code, None)
+
+        return item
+
+    def remove_product(self, product: Product, qtd: int = 1) -> None:
+        item = self.__get_item(product.code)
+
+        if item is None:
+            print("Product isn't at the basket")
+            return
+
+        if item.get("qtd") <= qtd:
+            del self.items[product.code]
+        else:
+            self.items[product.code]["qtd"] -= qtd
 
     def calculate_total(self) -> float:
         total = 0.0
