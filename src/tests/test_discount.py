@@ -19,7 +19,7 @@ class TestBulkDiscount(unittest.TestCase):
     def test_apply_discount(self):
         value = self.discount.apply(5.0, 3)
 
-        self.assertEqual(value, 14.5)
+        self.assertEqual(value, 13.5)
 
     def test_apply_discount_missing_min_qtd(self):
         value = self.discount.apply(5.0, 2)

@@ -8,3 +8,15 @@ class PercentageDiscount:
             price = price - (price * self.value)
 
         return round(price * qtd, 2)
+
+
+class BulkDiscount:
+    def __init__(self, value: float, min_qtd: int) -> None:
+        self.value = value
+        self.min_qtd = min_qtd
+
+    def apply(self, price: float, qtd: int) -> float:
+        if qtd >= self.min_qtd:
+            price = self.value
+
+        return price * qtd
