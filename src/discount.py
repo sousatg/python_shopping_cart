@@ -7,10 +7,10 @@ class PercentageDiscount:
         self.min_qtd = min_qtd
 
     def apply(self, price: float, qtd: int) -> float:
-        if qtd >= self.min_qtd:
-            price = price - (price * self.value)
+        if qtd < self.min_qtd:
+            return 0
 
-        return round(price * qtd, 2)
+        return (price - (price * self.value)) * qtd
 
 
 class BulkDiscount:
@@ -19,12 +19,12 @@ class BulkDiscount:
         self.min_qtd = min_qtd
 
     def apply(self, price: float, qtd: int) -> float:
-        if qtd >= self.min_qtd:
-            price = self.value
+        if qtd < self.min_qtd:
+            return 0
 
-        return price * qtd
+        return (price - self.value) * qtd
 
 
 class BOGODiscount:
     def apply(self, price: float, qtd: int) -> float:
-        return price * math.ceil(qtd / 2)
+        return price * math.floor(qtd / 2)

@@ -15,11 +15,6 @@ class Cart:
         else:
             self.items[product.code]["qtd"] += qtd
 
-    def add_discount(self, code, discount) -> None:
-        raise
-
-    def remove_discount(self, code) -> None:
-        raise
 
     def __get_item(self, code: str) -> dict:
         item = self.items.get(code, None)
@@ -38,10 +33,25 @@ class Cart:
         else:
             self.items[product.code]["qtd"] -= qtd
 
+    def add_discount(self, code, discount) -> None:
+        self.discounts[code] = discount
+
+    def remove_discount(self, code) -> None:
+        raise
+
     def calculate_total(self) -> float:
         total = 0.0
 
-        for item in self.items.values():
-            total += item.get("price", 0.0) * item.get("qtd", 0)
+        for item in self.items.items():
+            price = item[1].get("price", 0.0)
+            qtd = item[1].get("qtd", 0)
+
+            discount = 0.0
+
+            productDiscount = self.discounts.get(item[0], None)
+            if productDiscount is not None:
+                discount = productDiscount.apply(price, qtd)
+
+            total += (price * qtd) - discount
 
         return total

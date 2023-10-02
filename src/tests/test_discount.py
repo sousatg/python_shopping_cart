@@ -19,12 +19,12 @@ class TestBulkDiscount(unittest.TestCase):
     def test_apply_discount(self):
         value = self.discount.apply(5.0, 3)
 
-        self.assertEqual(value, 13.5)
+        self.assertEqual(value, 1.5)
 
     def test_apply_discount_missing_min_qtd(self):
         value = self.discount.apply(5.0, 2)
 
-        self.assertEqual(value, 10.0)
+        self.assertEqual(value, 0.0)
 
 
 class TestBOGODiscount(unittest.TestCase):
@@ -39,4 +39,4 @@ class TestBOGODiscount(unittest.TestCase):
     def test_apply_discount_odd_number_of_items(self):
         value = self.discount.apply(2, 3)
 
-        self.assertEqual(value, 4)
+        self.assertEqual(value, 2)
