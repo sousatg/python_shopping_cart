@@ -15,7 +15,6 @@ class Cart:
         else:
             self.items[product.code]["qtd"] += qtd
 
-
     def __get_item(self, code: str) -> dict:
         item = self.items.get(code, None)
 

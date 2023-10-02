@@ -10,7 +10,9 @@ class PercentageDiscount:
         if qtd < self.min_qtd:
             return 0
 
-        return (price - (price * self.value)) * qtd
+        value = (price - (price * self.value)) * qtd
+
+        return round(value, 2)
 
 
 class BulkDiscount:
