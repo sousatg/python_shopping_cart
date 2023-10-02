@@ -1,5 +1,5 @@
 import unittest
-from discount import PercentageDiscount, BulkDiscount
+from discount import PercentageDiscount, BulkDiscount, BOGODiscount
 
 
 class TestPercentageDiscount(unittest.TestCase):
@@ -25,3 +25,18 @@ class TestBulkDiscount(unittest.TestCase):
         value = self.discount.apply(5.0, 2)
 
         self.assertEqual(value, 10.0)
+
+
+class TestBOGODiscount(unittest.TestCase):
+    def setUp(self) -> None:
+        self.discount = BOGODiscount()
+
+    def test_apply_discount_even_number_of_items(self):
+        value = self.discount.apply(2, 2)
+
+        self.assertEqual(value, 2)
+
+    def test_apply_discount_odd_number_of_items(self):
+        value = self.discount.apply(2, 3)
+
+        self.assertEqual(value, 4)

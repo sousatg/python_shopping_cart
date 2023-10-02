@@ -1,3 +1,6 @@
+import math
+
+
 class PercentageDiscount:
     def __init__(self, value: float, min_qtd: int):
         self.value = value
@@ -20,3 +23,8 @@ class BulkDiscount:
             price = self.value
 
         return price * qtd
+
+
+class BOGODiscount:
+    def apply(self, price: float, qtd: int) -> float:
+        return price * math.ceil(qtd / 2)
