@@ -18,18 +18,24 @@ cart.add_discount("CF1", PercentageDiscount(2/3, 3))
 
 option = ""
 
-while option != "q":
-    print("A - Add Product\nB - Get Total")
+while option != "Q":
+    print("A - Add Product\nB - Remove Product\nC - Get Total\nD - Display Cart\nQ - Quit")
     option = input("Select a option: ")
 
     if option == "A":
         for i in range(len(products)):
-            print(f"i - {products[i].name} {products[i].price}")
+            print(f"{i} - {products[i].name} {products[i].price}")
         prod_index = input("Select prod to add: ")
         qtd = input("Select QTD: ")
 
-        print(qtd)
-
         cart.add_product(products[int(prod_index)], int(qtd))
-    elif option == "B":
+    if option == "B":
+        print(cart.get_items())
+        product_code = input("Select product code to remove: ")
+        qtd = input("Select QTD: ")
+
+        cart.remove_product(product_code, int(qtd))
+    if option == "D":
+        print(cart.get_items())
+    elif option == "C":
         print("Cart Total: ", cart.calculate_total())

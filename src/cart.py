@@ -6,6 +6,9 @@ class Cart:
         self.items = {}
         self.discounts = {}
 
+    def get_items(self):
+        return self.items
+
     def add_product(self, product: Product, qtd: int = 1) -> None:
         if self.items.get(product.code, None) is None:
             self.items[product.code] = {
@@ -20,23 +23,20 @@ class Cart:
 
         return item
 
-    def remove_product(self, product: Product, qtd: int = 1) -> None:
-        item = self.__get_item(product.code)
+    def remove_product(self, product_code: str, qtd: int = 1) -> None:
+        item = self.__get_item(product_code)
 
         if item is None:
             print("Product isn't at the basket")
             return
 
         if item.get("qtd") <= qtd:
-            del self.items[product.code]
+            del self.items[product_code]
         else:
-            self.items[product.code]["qtd"] -= qtd
+            self.items[product_code]["qtd"] -= qtd
 
     def add_discount(self, code, discount) -> None:
         self.discounts[code] = discount
-
-    def remove_discount(self, code) -> None:
-        raise
 
     def calculate_total(self) -> float:
         total = 0.0
